@@ -32,13 +32,15 @@ npx http-server -p 8000
 - **GitHub Pages**: 저장소 설정에서 Pages 활성화
 - **Netlify**: `index.html`을 드래그 앤 드롭
 - **Vercel**: 프로젝트 폴더를 배포
-- **Render**: Static Site로 배포
+- **Render**: Static Site로 배포 (자세한 방법은 `RENDER_DEPLOYMENT.md` 참조)
 
 ## 파일 구조
 
 ```
 .
 ├── index.html            # 프론트엔드 페이지 (단일 파일)
+├── render.yaml          # Render 배포 설정
+├── RENDER_DEPLOYMENT.md # Render 배포 가이드
 └── README.md            # 이 파일
 ```
 

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: test-example-downloader
+    env: static
+    buildCommand: echo "No build required"
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
