@@ -38,6 +38,7 @@
         }
 
         .download-btn {
+            display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
@@ -50,6 +51,7 @@
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
             width: 100%;
             max-width: 300px;
+            text-decoration: none;
         }
 
         .download-btn:hover {
@@ -61,92 +63,15 @@
             transform: translateY(0);
         }
 
-        .download-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .status {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-            min-height: 20px;
-        }
-
-        .status.loading {
-            color: #667eea;
-        }
-
-        .status.error {
-            color: #e74c3c;
-        }
-
-        .status.success {
-            color: #27ae60;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>파일 다운로드</h1>
-        <button class="download-btn" id="downloadBtn" onclick="downloadFile()">
+        <a href="https://github.com/dalkus77/bibe/archive/refs/tags/example.zip" download="example.zip" class="download-btn">
             다운로드 시작
-        </button>
-        <div class="status" id="status"></div>
+        </a>
     </div>
-
-    <script>
-        // GitHub 파일 다운로드 URL
-        const DOWNLOAD_URL = 'https://github.com/dalkus77/bibe/archive/refs/tags/example.zip';
-
-        async function downloadFile() {
-            const btn = document.getElementById('downloadBtn');
-            const status = document.getElementById('status');
-            
-            // 버튼 비활성화 및 상태 표시
-            btn.disabled = true;
-            btn.textContent = '다운로드 중...';
-            status.textContent = '파일을 다운로드하고 있습니다...';
-            status.className = 'status loading';
-
-            try {
-                // GitHub에서 직접 파일 다운로드
-                const response = await fetch(DOWNLOAD_URL, {
-                    method: 'GET',
-                });
-
-                if (!response.ok) {
-                    throw new Error('다운로드 실패: ' + response.statusText);
-                }
-
-                // Blob으로 변환
-                const blob = await response.blob();
-                
-                // 다운로드 링크 생성
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'example.zip';
-                document.body.appendChild(a);
-                a.click();
-                
-                // 정리
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-
-                status.textContent = '다운로드가 완료되었습니다!';
-                status.className = 'status success';
-                btn.textContent = '다운로드 완료';
-                
-            } catch (error) {
-                status.textContent = '오류: ' + error.message;
-                status.className = 'status error';
-                btn.textContent = '다시 시도';
-                btn.disabled = false;
-            }
-        }
-    </script>
 </body>
 </html>
 
